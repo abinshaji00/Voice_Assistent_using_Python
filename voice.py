@@ -40,7 +40,7 @@ def wishMe():
     else:
         speak("Good Evening Sir !")
 
-    assname = ("Jarvis 1 point o")
+    assname = ("Alexa")
     speak("I am your Assistant")
     speak(assname)
 
@@ -52,9 +52,9 @@ def username():
     speak(uname)
     columns = shutil.get_terminal_size().columns
 
-    print("#####################".center(columns))
+
     print("Welcome Mr.", uname.center(columns))
-    print("#####################".center(columns))
+
 
     speak("How can i Help you, Sir")
 
@@ -86,7 +86,7 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
 
-    # Enable low security in gmail
+
     server.login('your email id', 'your email password')
     server.sendmail('your email id', to, content)
     server.close()
@@ -95,8 +95,7 @@ def sendEmail(to, content):
 if __name__ == '__main__':
     clear = lambda: os.system('cls')
 
-    # This Function will clean any
-    # command before execution of this python file
+
     clear()
     wishMe()
     username()
@@ -105,10 +104,7 @@ if __name__ == '__main__':
 
         query = takeCommand().lower()
 
-        # All the commands said by user will be
-        # stored here in 'query' and will be
-        # converted to lower case for easily
-        # recognition of command
+
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
             query = query.replace("wikipedia", "")
@@ -125,9 +121,13 @@ if __name__ == '__main__':
             speak("Here you go to Google\n")
             webbrowser.open("google.com")
 
-        elif 'open stackoverflow' in query:
-            speak("Here you go to Stack Over flow.Happy coding")
-            webbrowser.open("stackoverflow.com")
+        elif 'open insta' in query:
+            speak("Here you go to Google\n")
+            webbrowser.open("instagram.com")
+
+        elif 'open facebook' in query:
+            speak("Here you go to Google\n")
+            webbrowser.open("facebook.com")
 
         elif 'play music' in query or "play song" in query:
             speak("Here you go with music")
@@ -234,7 +234,7 @@ if __name__ == '__main__':
         elif 'reason for you' in query:
             speak("I was created as a Minor project by Mister Abin and Jibin ")
 
-        elif 'change background' in query:
+        elif 'change wallpaper' in query:
             ctypes.windll.user32.SystemParametersInfoW(20,
                                                        0,
                                                        "D:\\IMG_0409.JPG",
@@ -246,7 +246,7 @@ if __name__ == '__main__':
 
             try:
                 jsonObj = urlopen(
-                    '''https://newsapi.org / v1 / articles?source = the-times-of-india&sortBy = top&apiKey =\\times of India Api key\\''')
+                    '''https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&apiKey=\\times-of-India-Api-key\\''')
                 data = json.load(jsonObj)
                 i = 1
 
@@ -315,11 +315,10 @@ if __name__ == '__main__':
 
 
 
-        elif "assistant" in query:
+        elif "alexa" in query:
 
             wishMe()
-            speak("Assistant in your service Mister")
-            speak(assname)
+            speak("Alexa in your service Mister what can i do for you")
 
         elif "weather" in query:
 
