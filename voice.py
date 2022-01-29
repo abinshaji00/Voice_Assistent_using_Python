@@ -6,10 +6,14 @@ import shutil
 import smtplib
 import subprocess
 import time
+from tkinter import Frame
+from turtle import speed
 import webbrowser
-#from ecapture import ecapture as ec
+from cv2 import VideoCapture
+from ecapture import ecapture as ec
 from urllib.request import urlopen
-
+from newsapi import NewsApiClient
+from numpy import true_divide
 import pyjokes
 import pyttsx3
 import requests
@@ -18,6 +22,7 @@ import wikipedia
 import winshell
 import wolframalpha
 from twilio.rest import Client
+import cv2
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -104,16 +109,7 @@ if __name__ == '__main__':
 
         query = takeCommand().lower()
 
-
-        if 'wikipedia' in query:
-            speak('Searching Wikipedia...')
-            query = query.replace("wikipedia", "")
-            results = wikipedia.summary(query, sentences=3)
-            speak("According to Wikipedia")
-            print(results)
-            speak(results)
-
-        elif 'open youtube' in query:
+        if 'open youtube' in query:
             speak("Here you go to Youtube\n")
             webbrowser.open("youtube.com")
 
@@ -246,7 +242,7 @@ if __name__ == '__main__':
 
             try:
                 jsonObj = urlopen(
-                    '''https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&apiKey=\\times-of-India-Api-key\\''')
+                    '''https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=a76dba6e43064501bac75a4b5011421a''')
                 data = json.load(jsonObj)
                 i = 1
 
@@ -308,9 +304,20 @@ if __name__ == '__main__':
 
         elif "show note" in query:
             speak("Showing Notes")
-            file = open("jarvis.txt", "r")
+            file = open("abin.txt", "r")
             print(file.read())
             speak(file.read(6))
+
+        elif "camera" in query or "photo" in query:
+            speak("Opening camera")
+            vid = cv2.VideoCapture(0)
+            while(True):
+                ret,frame = vid.read()
+                cv2.imshow('frame', frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            vid.release()
+            cv2.distroyAllwindows()
 
 
 
@@ -363,7 +370,12 @@ if __name__ == '__main__':
             print(message.sid)
 
         elif "wikipedia" in query:
-            webbrowser.open("wikipedia.com")
+            speak('Searching Wikipedia')
+            text =text.replace("wikipedia", ".")
+            results = wikipedia.summary('text', sentences=3)
+            speak("According to Wikipedia")
+            print(results)
+            speak(results)
 
         elif "Good Morning" in query:
             speak("A warm" + query)
@@ -393,6 +405,6 @@ if __name__ == '__main__':
             except StopIteration:
                 print("No results")
 
-    # elif "" in query:
-    # Command go here
-    # For adding more commands
+        if "stop" in query or "exit" in query or "bye" in query:
+            speak("Ok bye and take care")
+            break
