@@ -23,6 +23,7 @@ import winshell
 import wolframalpha
 from twilio.rest import Client
 import cv2
+import requests,json
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -261,7 +262,7 @@ if __name__ == '__main__':
 
         elif 'shutdown system' in query:
             speak("Hold On a Sec ! Your system is on its way to shut down")
-            subprocess.call('shutdown / p /f')
+            os.system('shutdown / p /f')
 
         elif "don't listen" in query or "stop listening" in query:
             speak("for how much time you want to stop jarvis from listening commands")
@@ -331,26 +332,21 @@ if __name__ == '__main__':
 
 
             api_key = 'a76dba6e43064501bac75a4b5011421a'
-            base_url = "http://api.openweathermap.org/data/2.5/weather?"
-            speak(" City name ")
-            print("City name : ")
-            city_name = takeCommand()
-            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+            base_url = "https://api.openweathermap.org/data/2.5/weather?"
+            city_name = "kalpetta"
+            complete_url = base_url+"&q="+city_name+"appid="+api_key 
             response = requests.get(complete_url)
-            x = response.json()
-
-
-            if x["cod"] != "404":
-                y = x["main"]
-                current_temperature = y["temp"]
-                current_pressure = y["pressure"]
-                current_humidiy = y["humidity"]
-                z = x["weather"]
-                weather_description = z[0]["description"]
+            if response.status_code ==200:
+                data = response.json()
+                main = main["main"]
+                current_temperature = main["temp"]
+                current_pressure = main["pressure"]
+                current_humidiy = main["humidity"]
+                report = data["weather"]
                 speak(" Temperature (in kelvin unit) = " + str(
                     current_temperature) + "\n atmospheric pressure (in hPa unit) =" + str(
                     current_pressure) + "\n humidity (in percentage) = " + str(
-                    current_humidiy) + "\n description = " + str(weather_description))
+                    current_humidiy) + "\n description = " + str(report))
 
             else:
                 speak(" City Not Found ")
