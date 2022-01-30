@@ -58,13 +58,12 @@ def username():
     uname = takeCommand()
     speak("Welcome Mister")
     speak(uname)
-    columns = shutil.get_terminal_size().columns
 
 
-    print("Welcome Mr.", uname.center(columns))
+    print("Welcome Mr.", uname)
 
 
-    speak("How can i Help you, Sir")
+    speak("How can i Help you")
 
 
 def takeCommand():
@@ -386,10 +385,21 @@ if __name__ == '__main__':
 
         elif "i love you" in query:
             speak("It's hard to understand")
-        elif "transalate" in query:
-            translator= Translator(to_lang="German")
-            translation = translator.translate("Good Morning!")
-            speak('translation')
+
+        elif "thank you" in query or "thanks" in query:
+            speak("your wellcome")
+
+        elif "translate" in query:
+            speak("What shuld i translate")
+            note_text = takeCommand()
+            translator= Translator(from_lang="english",to_lang="spanish")
+            translation = translator.translate(note_text)
+            print(translation)
+            speak("in spaninsh"+str(translation))
+            translator1= Translator(from_lang="english",to_lang="german")
+            translation1 = translator1.translate(note_text)
+            print(translation1)
+            speak("in german"+str(translation1))
 
 
         elif "what is" in query or "who is" in query:
