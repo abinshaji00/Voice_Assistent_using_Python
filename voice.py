@@ -291,7 +291,7 @@ if __name__ == '__main__':
         elif "write a note" in query:
             speak("What should i write, sir")
             note = takeCommand()
-            file = open('jarvis.txt', 'w')
+            file = open('abin.txt', 'w')
             speak("Sir, Should i include date and time")
             snfm = takeCommand()
             if 'yes' in snfm or 'sure' in snfm:
