@@ -24,6 +24,8 @@ import wolframalpha
 from twilio.rest import Client
 import cv2
 import requests,json
+import pygame
+from translate import Translator
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -201,7 +203,7 @@ if __name__ == '__main__':
 
         elif "calculate" in query:
 
-            app_id = 'a76dba6e43064501bac75a4b5011421a'
+            app_id = 'LXUEPH-YXR8WKAYL2'
             client = wolframalpha.Client(app_id)
             indx = query.lower().split().index('calculate')
             query = query.split()[indx + 1:]
@@ -260,9 +262,7 @@ if __name__ == '__main__':
                 print(str(e))
 
 
-        elif 'shutdown system' in query:
-            speak("Hold On a Sec ! Your system is on its way to shut down")
-            os.system('shutdown / p /f')
+
 
         elif "don't listen" in query or "stop listening" in query:
             speak("for how much time you want to stop jarvis from listening commands")
@@ -329,25 +329,24 @@ if __name__ == '__main__':
             speak("Alexa in your service Mister what can i do for you")
 
         elif "weather" in query:
-
-
-            api_key = 'a76dba6e43064501bac75a4b5011421a'
-            base_url = "https://api.openweathermap.org/data/2.5/weather?"
-            city_name = "kalpetta"
-            complete_url = base_url+"&q="+city_name+"appid="+api_key 
+            api_key = 'b2cc8eb41ce2745977176f86529d7722'
+            base_url = "http://api.openweathermap.org/data/2.5/weather?"
+            city_name = "kalpatta"
+            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
             response = requests.get(complete_url)
-            if response.status_code ==200:
-                data = response.json()
-                main = main["main"]
-                current_temperature = main["temp"]
-                current_pressure = main["pressure"]
-                current_humidiy = main["humidity"]
-                report = data["weather"]
+            x = response.json()
+
+            if x["cod"] != "404":
+                y = x["main"]
+                current_temperature = y["temp"]
+                current_pressure = y["pressure"]
+                current_humidiy = y["humidity"]
+                z = x["weather"]
+                weather_description = z[0]["description"]
                 speak(" Temperature (in kelvin unit) = " + str(
                     current_temperature) + "\n atmospheric pressure (in hPa unit) =" + str(
                     current_pressure) + "\n humidity (in percentage) = " + str(
-                    current_humidiy) + "\n description = " + str(report))
-
+                    current_humidiy) + "\n description = " + str(weather_description))
             else:
                 speak(" City Not Found ")
 
@@ -387,6 +386,11 @@ if __name__ == '__main__':
 
         elif "i love you" in query:
             speak("It's hard to understand")
+        elif "transalate" in query:
+            translator= Translator(to_lang="German")
+            translation = translator.translate("Good Morning!")
+            speak('translation')
+
 
         elif "what is" in query or "who is" in query:
 
