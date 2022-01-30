@@ -118,19 +118,19 @@ if __name__ == '__main__':
             webbrowser.open("google.com")
 
         elif 'open insta' in query:
-            speak("Here you go to Google\n")
+            speak("Here you go to Instagram\n")
             webbrowser.open("instagram.com")
 
         elif 'open facebook' in query:
-            speak("Here you go to Google\n")
+            speak("Here you go to Facebook\n")
             webbrowser.open("facebook.com")
 
         elif 'play music' in query or "play song" in query:
             speak("Here you go with music")
-            music_dir = "D:\\music\\"
-            songs = os.listdir(music_dir)
+            music_dir = "D:\\music\\AUD-20201214-WA0104.mp3"
+            songs = os.system(music_dir)
             print(songs)
-            random = os.startfile(os.path.join(music_dir, songs[1]))
+
 
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
         elif "calculate" in query:
 
-            app_id = 'LXUEPH-YXR8WKAYL2'
+            app_id = 'a76dba6e43064501bac75a4b5011421a'
             client = wolframalpha.Client(app_id)
             indx = query.lower().split().index('calculate')
             query = query.split()[indx + 1:]
@@ -330,7 +330,7 @@ if __name__ == '__main__':
         elif "weather" in query:
 
 
-            api_key = 'b2cc8eb41ce2745977176f86529d7722'
+            api_key = 'a76dba6e43064501bac75a4b5011421a'
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
             speak(" City name ")
             print("City name : ")
@@ -396,7 +396,7 @@ if __name__ == '__main__':
 
             # Use the same API key
             # that we have generated earlier
-            client = wolframalpha.Client("LXUEPH-YXR8WKAYL2")
+            client = wolframalpha.Client("a76dba6e43064501bac75a4b5011421a")
             res = client.query(query)
 
             try:
