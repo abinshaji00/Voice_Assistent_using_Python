@@ -195,7 +195,7 @@ if __name__ == '__main__':
         elif "who made you" in query or "who created you" in query:
             speak("I have been created by Abin snd jibin.")
 
-        elif 'joke' in query:
+        elif 'joke' in query or 'comedy' in query:
             speak(pyjokes.get_joke())
 
         elif "calculate" in query:
@@ -242,7 +242,7 @@ if __name__ == '__main__':
 
             try:
                 jsonObj = urlopen(
-                    '''https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=a76dba6e43064501bac75a4b5011421a''')
+                    '''https://newsapi.org/v2/top-headlines?country=in&apiKey=a76dba6e43064501bac75a4b5011421a''')
                 data = json.load(jsonObj)
                 i = 1
 
@@ -394,8 +394,7 @@ if __name__ == '__main__':
 
         elif "what is" in query or "who is" in query:
 
-            # Use the same API key
-            # that we have generated earlier
+
             client = wolframalpha.Client("a76dba6e43064501bac75a4b5011421a")
             res = client.query(query)
 
