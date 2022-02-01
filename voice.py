@@ -51,18 +51,6 @@ def wishMe():
     assname = ("Alexa")
     speak("I am your Assistant")
     speak(assname)
-
-
-def username():
-    speak("What should i call you sir")
-    uname = takeCommand()
-    speak("Welcome Mister")
-    speak(uname)
-
-
-    print("Welcome Mr.", uname)
-
-
     speak("How can i Help you")
 
 
@@ -105,7 +93,6 @@ if __name__ == '__main__':
 
     clear()
     wishMe()
-    username()
 
     while True:
 
@@ -143,31 +130,8 @@ if __name__ == '__main__':
             os.startfile(codePath)
 
         elif 'open whatsapp' in query:
-            codePath = r"C:\\Users\\abins\\AppData\\Local\\WhatsApp\\WhatsApp.exe"
+            codePath = r"C:\\Users\\abin\\AppData\\Local\\WhatsApp\\WhatsApp.exe"
             os.startfile(codePath)
-
-        elif 'email to abin' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                to = "Receiver email address"
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
-
-        elif 'send a mail' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                speak("whome should i send")
-                to = input()
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
 
         elif 'how are you' in query:
             speak("I am fine, Thank you")
@@ -175,10 +139,6 @@ if __name__ == '__main__':
 
         elif 'fine' in query or "good" in query:
             speak("It's good to know that your fine")
-
-        elif "change my name to" in query:
-            query = query.replace("change my name to", "")
-            assname = query
 
         elif "change name" in query:
             speak("What would you like to call me, Sir ")
@@ -189,10 +149,6 @@ if __name__ == '__main__':
             speak("My friends call me")
             speak(assname)
             print("My friends call me", assname)
-
-        elif 'exit' in query:
-            speak("Thanks for giving me your time")
-            exit()
 
         elif "who made you" in query or "who created you" in query:
             speak("I have been created by Abin snd jibin.")
