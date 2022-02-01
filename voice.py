@@ -106,13 +106,6 @@ if __name__ == '__main__':
             speak("Here you go to Google\n")
             webbrowser.open("google.com")
 
-        elif 'open mail' in query or 'open gmail' in query:
-            speak("Here you go to Gmail\n")
-            webbrowser.open("Gmail.com")
-
-        elif 'open meet' in query or 'open Google meet':
-            speak("Here you go to Google\n")
-            webbrowser.open("google.com")
             
         elif 'open insta' in query:
             speak("Here you go to Instagram\n")
@@ -228,7 +221,7 @@ if __name__ == '__main__':
 
 
         elif "don't listen" in query or "stop listening" in query:
-            speak("for how much time you want to stop jarvis from listening commands")
+            speak("for how much time you want to stop alexa from listening commands")
             a = int(takeCommand())
             time.sleep(a)
             print(a)
@@ -255,19 +248,25 @@ if __name__ == '__main__':
         elif "write a note" in query:
             speak("What should i write, sir")
             note = takeCommand()
-            file = open('abin.txt', 'w')
+            file = open('abin.txt', "r+")
+            file.truncate(0)
+            file.write(note)
+            file.close()
             speak("Successfully created note")
 
 
         elif "show note" in query:
             speak("Showing Notes")
-            file = open("abin.txt", "r")
-            print(file.read())
-            speak(file.read(6))
+            
+            with open('abin.txt') as file:
+                file = open('abin.txt', "r")
+                print(file.read())
+                speak(file.read(6))
 
         elif "camera" in query or "photo" in query:
             speak("Opening camera")
             vid = cv2.VideoCapture(0)
+            speak("press Q fot closing the camera")
             while(True):
                 ret,frame = vid.read()
                 cv2.imshow('frame', frame)
@@ -322,11 +321,12 @@ if __name__ == '__main__':
 
         elif "wikipedia" in query:
             speak('Searching Wikipedia')
-            text =text.replace("wikipedia", ".")
-            results = wikipedia.summary('text', sentences=3)
+            query =query.replace("wikipedia", "")
+            results = wikipedia.summary('query', sentences = 2)
+            wiki = results
             speak("According to Wikipedia")
-            print(results)
-            speak(results)
+            print(wiki)
+            speak(wiki)
 
         elif "Good Morning" in query:
             speak("A warm" + query)
@@ -362,13 +362,14 @@ if __name__ == '__main__':
         elif "what is" in query or "who is" in query:
 
 
-            client = wolframalpha.Client("a76dba6e43064501bac75a4b5011421a")
+            client = wolframalpha.Client("GKPV5U-XT9W7478JA")
             res = client.query(query)
 
             try:
                 print(next(res.results).text)
                 speak(next(res.results).text)
             except StopIteration:
+                speak("No results found. please try again")
                 print("No results")
 
         if "stop" in query or "exit" in query or "bye" in query:
