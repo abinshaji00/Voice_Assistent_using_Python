@@ -106,6 +106,14 @@ if __name__ == '__main__':
             speak("Here you go to Google\n")
             webbrowser.open("google.com")
 
+        elif 'open mail' in query or 'open gmail' in query:
+            speak("Here you go to Gmail\n")
+            webbrowser.open("Gmail.com")
+
+        elif 'open meet' in query or 'open Google meet':
+            speak("Here you go to Google\n")
+            webbrowser.open("google.com")
+            
         elif 'open insta' in query:
             speak("Here you go to Instagram\n")
             webbrowser.open("instagram.com")
@@ -248,15 +256,8 @@ if __name__ == '__main__':
             speak("What should i write, sir")
             note = takeCommand()
             file = open('abin.txt', 'w')
-            speak("Sir, Should i include date and time")
-            snfm = takeCommand()
-            if 'yes' in snfm or 'sure' in snfm:
-                strTime = datetime.datetime.now().strftime("% H:% M:% S")
-                file.write(strTime)
-                file.write(" :- ")
-                file.write(note)
-            else:
-                file.write(note)
+            speak("Successfully created note")
+
 
         elif "show note" in query:
             speak("Showing Notes")
