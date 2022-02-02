@@ -171,14 +171,12 @@ if __name__ == '__main__':
         elif 'search' in query:
 
             query = query.replace("search", "")
-            query = query.replace("play", "")
             webbrowser.open(query)
       
         elif 'play' in query:
 
-            query = query.replace("search", "")
             query = query.replace("play", "")
-            webbrowser.open("https://www.youtube.com/results?search_query" + query + "")
+            webbrowser.open("https://www.youtube.com/results?search_query/" + query + "")
 
         elif "who i am" in query:
             speak("If you talk then definitely your human.")
@@ -244,7 +242,7 @@ if __name__ == '__main__':
             subprocess.call("shutdown /h")
 
         elif "shutdown" in query:
-            speak("See you again")
+            speak("Make sure all the application are closed before sign-out.See you again")
             subprocess.call("shutdown /s")
 
         elif "write a note" in query:
@@ -283,7 +281,7 @@ if __name__ == '__main__':
         elif "alexa" in query:
 
             wishMe()
-            speak("Alexa in your service Mister what can i do for you")
+            speak("Hello there, How can i be of service")
 
         elif "weather" in query:
             api_key = 'b2cc8eb41ce2745977176f86529d7722'
@@ -300,6 +298,10 @@ if __name__ == '__main__':
                 current_humidiy = y["humidity"]
                 z = x["weather"]
                 weather_description = z[0]["description"]
+                print(" Temperature (in kelvin unit) = " + str(
+                    current_temperature) + "\n atmospheric pressure (in hPa unit) =" + str(
+                    current_pressure) + "\n humidity (in percentage) = " + str(
+                    current_humidiy) + "\n description = " + str(weather_description))
                 speak(" Temperature (in kelvin unit) = " + str(
                     current_temperature) + "\n atmospheric pressure (in hPa unit) =" + str(
                     current_pressure) + "\n humidity (in percentage) = " + str(
