@@ -190,10 +190,7 @@ if __name__ == '__main__':
             speak("I was created as a Minor project by Mister Abin and Jibin ")
 
         elif 'change wallpaper' in query:
-            ctypes.windll.user32.SystemParametersInfoW(20,
-                                                       0,
-                                                       "D:\\IMG_0409.JPG",
-                                                       0)
+            ctypes.windll.user32.SystemParametersInfoW(20,0,"D:\\IMG_0409.JPG",0)
             speak("Background changed successfully")
 
 
