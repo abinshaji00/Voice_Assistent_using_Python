@@ -168,11 +168,17 @@ if __name__ == '__main__':
             print("The answer is " + answer)
             speak("The answer is " + answer)
 
-        elif 'search' in query or 'play' in query:
+        elif 'search' in query:
 
             query = query.replace("search", "")
             query = query.replace("play", "")
             webbrowser.open(query)
+      
+        elif 'play' in query:
+
+            query = query.replace("search", "")
+            query = query.replace("play", "")
+            webbrowser.open("https://www.youtube.com/results?search_query" + query + "")
 
         elif "who i am" in query:
             speak("If you talk then definitely your human.")
@@ -235,12 +241,11 @@ if __name__ == '__main__':
 
         elif "hibernate" in query or "sleep" in query:
             speak("Hibernating")
-            subprocess.call("shutdown / h")
+            subprocess.call("shutdown /h")
 
-        elif "log off" in query or "sign out" in query:
-            speak("Make sure all the application are closed before sign-out")
-            time.sleep(5)
-            subprocess.call(["shutdown", "/l"])
+        elif "shutdown" in query:
+            speak("See you again")
+            subprocess.call("shutdown /s")
 
         elif "write a note" in query:
             speak("What should i write, sir")
@@ -252,18 +257,18 @@ if __name__ == '__main__':
             speak("Successfully created note")
 
 
-        elif "show note" in query:
+        elif "show note" in query or "show me the note" in query or "notes" in query:
             speak("Showing Notes")
             
             with open('abin.txt') as file:
                 file = open('abin.txt', "r")
                 print(file.read())
-                speak(file.read(6))
+                speak(file.read())
 
         elif "camera" in query or "photo" in query:
             speak("Opening camera")
             vid = cv2.VideoCapture(0)
-            speak("press Q fot closing the camera")
+            speak("press Q for closing the camera")
             while(True):
                 ret,frame = vid.read()
                 cv2.imshow('frame', frame)
@@ -303,16 +308,11 @@ if __name__ == '__main__':
                 speak(" City Not Found ")
 
         elif "send message " in query:
-            account_sid = 'Account Sid key'
-            auth_token = 'Auth token'
+            account_sid = 'AC2fbfea9275bd5e320d98da7284700801'
+            auth_token = '191b400bc72a19adcd56b8b657125867'
             client = Client(account_sid, auth_token)
 
-            message = client.messages \
-                .create(
-                body=takeCommand(),
-                from_='Sender No',
-                to='Receiver No'
-            )
+            message = client.messages.create(body=takeCommand(),from_='+17854250334',to='+917558840018')
 
             print(message.sid)
 
