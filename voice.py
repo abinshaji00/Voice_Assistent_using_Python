@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 import shutil
-import smtplib
+import smtplib,ssl,csv
 import subprocess
 import time
 from tkinter import Frame
@@ -74,18 +74,6 @@ def takeCommand():
         return takeCommand()
 
     return query
-
-
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-
-
-    server.login('your email id', 'your email password')
-    server.sendmail('your email id', to, content)
-    server.close()
-
 
 if __name__ == '__main__':
     clear = lambda: os.system('cls')
@@ -263,7 +251,7 @@ if __name__ == '__main__':
                 print(file.read())
                 speak(file.read())
 
-        elif "camera" in query or "photo" in query:
+        elif "camera" in query:
             speak("Opening camera")
             vid = cv2.VideoCapture(0)
             speak("press Q for closing the camera")
@@ -320,8 +308,8 @@ if __name__ == '__main__':
 
         elif "wikipedia" in query:
             speak('Searching Wikipedia')
-            query =query.replace("wikipedia", "")
-            results = wikipedia.summary('query', sentences = 2)
+            query =query.replace("","wikipedia")
+            results = wikipedia.summary('query')
             wiki = results
             speak("According to Wikipedia")
             print(wiki)
@@ -357,8 +345,22 @@ if __name__ == '__main__':
             print(translation1)
             speak("in german"+str(translation1))
 
+        elif "send mail" in query:
+            speak("What shuld i send")
+            message = takeCommand()
+            from_address = "abinshaji60@gmail.com"
+            password = "abin@123"
 
-        elif "what is" in query or "who is" in query:
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+                server.login(from_address, password)
+                with open("contacts_file.csv") as file:
+                    reader = csv.reader(file)
+                    email = "abinshaji.shaji1@gmail.com"
+                    next(reader)  # Skip header row
+                    server.sendmail(from_address,email,message,)
+
+        if "what is" in query or "who is" in query:
 
 
             client = wolframalpha.Client("GKPV5U-XT9W7478JA")
@@ -371,6 +373,6 @@ if __name__ == '__main__':
                 speak("No results found. please try again")
                 print("No results")
 
-        if "stop" in query or "exit" in query or "bye" in query:
+        elif "stop" in query or "exit" in query or "bye" in query:
             speak("Ok bye and take care")
             break
