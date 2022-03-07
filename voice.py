@@ -12,6 +12,7 @@ import webbrowser
 from cv2 import VideoCapture
 from ecapture import ecapture as ec
 from urllib.request import urlopen
+
 from newsapi import NewsApiClient
 from numpy import true_divide
 import pyjokes
