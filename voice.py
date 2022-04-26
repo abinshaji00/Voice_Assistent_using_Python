@@ -195,8 +195,8 @@ if __name__ == '__main__':
                 data = json.load(jsonObj)
                 i = 1
 
-                speak('here are some top news from the times of india')
-                print('''=============== TIMES OF INDIA ============''' + '\n')
+                speak('here are some top news')
+                print('''=============== TOP NEWS  ============''' + '\n')
 
                 for item in data['articles']:
                     print(str(i) + '. ' + item['title'] + '\n')
@@ -259,7 +259,7 @@ if __name__ == '__main__':
             while(True):
                 ret,frame = vid.read()
                 cv2.imshow('frame', frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q','Q'):
                     break
             vid.release()
             cv2.destroyAllwindows()
