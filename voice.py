@@ -8,6 +8,7 @@ import subprocess
 import time
 from tkinter import Frame
 from turtle import speed
+import turtle
 import webbrowser
 from cv2 import VideoCapture
 from ecapture import ecapture as ec
@@ -49,7 +50,7 @@ def wishMe():
     else:
         speak("Good Evening Sir !")
 
-    assname = ("Alexa")
+    assname = ("Ela")
     speak("I am your Assistant")
     speak(assname)
     speak("How can i Help you")
@@ -75,6 +76,18 @@ def takeCommand():
         return takeCommand()
 
     return query
+
+turtle.bgcolor("black")
+turtle.pensize(2)
+turtle.speed(0)
+
+for i in range(6):
+    for colours in ["red","magenta","blue","cyan","green","yellow","white"]:
+        turtle.color(colours)
+        turtle.circle(100)
+        turtle.left(10)
+
+turtle.hideturtle()
 
 if __name__ == '__main__':
     clear = lambda: os.system('cls')
@@ -141,7 +154,7 @@ if __name__ == '__main__':
             print("My friends call me", assname)
 
         elif "who made you" in query or "who created you" in query:
-            speak("I have been created by Abin snd jibin.")
+            speak("I have been created by Abin and jibin.")
 
         elif 'joke' in query or 'comedy' in query:
             speak(pyjokes.get_joke())
@@ -267,7 +280,7 @@ if __name__ == '__main__':
 
 
 
-        elif "alexa" in query:
+        elif "ela" in query:
 
             wishMe()
             speak("Hello there, How can i be of service")
@@ -312,8 +325,7 @@ if __name__ == '__main__':
             query =query.replace("","wikipedia")
             results = wikipedia.summary('query')
             wiki = results
-            speak("According to Wikipedia")
-            print(wiki)
+            speak('According to Wikipedia')
             speak(wiki)
 
         elif "Good Morning" in query:
