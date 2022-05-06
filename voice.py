@@ -334,7 +334,7 @@ if __name__ == '__main__':
             speak(assname)
 
         # most asked question from google Assistant
-        elif "will you be my gf" in query or "will you be my bf" in query:
+        elif "will you be my " in query:
             speak("I'm not sure about, may be you should give me some time")
 
         elif "how are you" in query:
