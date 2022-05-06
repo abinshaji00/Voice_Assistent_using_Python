@@ -117,7 +117,7 @@ if __name__ == '__main__':
             speak("Here you go to Facebook\n")
             webbrowser.open("facebook.com")
 
-        elif 'play music' in query or "play song" in query:
+        elif 'play music' in query or "play a song" in query:
             speak("Here you go with music")
             music_dir = "D:\\music\\AUD-20201214-WA0104.mp3"
             songs = os.system(music_dir)
@@ -224,7 +224,7 @@ if __name__ == '__main__':
 
 
         elif "don't listen" in query or "stop listening" in query:
-            speak("for how much time you want to stop alexa from listening commands")
+            speak("for how much time you want to stop ela from listening commands")
             a = int(takeCommand())
             time.sleep(a)
             print(a)
