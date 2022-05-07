@@ -143,16 +143,6 @@ if __name__ == '__main__':
         elif 'fine' in query or "good" in query:
             speak("It's good to know that your fine")
 
-        elif "change name" in query:
-            speak("What would you like to call me, Sir ")
-            assname = takeCommand()
-            speak("Thanks for naming me")
-
-        elif "what's your name" in query or "What is your name" in query:
-            speak("My friends call me")
-            speak(assname)
-            print("My friends call me", assname)
-
         elif "who made you" in query or "who created you" in query:
             speak("I have been created by Abin and jibin.")
 
@@ -183,7 +173,7 @@ if __name__ == '__main__':
         elif "who i am" in query:
             speak("If you talk then definitely your human.")
 
-        elif "why you came to world" in query:
+        elif "why you came" in query:
             speak("Thanks to Abin and jibin. further It's a secret")
 
         elif 'is love' in query:
@@ -263,7 +253,7 @@ if __name__ == '__main__':
             with open('abin.txt') as file:
                 file = open('abin.txt', "r")
                 print(file.read())
-                speak(file.read())
+                speak("file.read()")
 
         elif "camera" in query:
             speak("Opening camera")
@@ -321,9 +311,11 @@ if __name__ == '__main__':
             print(message.sid)
 
         elif "wikipedia" in query:
+            speak("What shuld i check in wikipedia")
+            note_text = takeCommand()
             speak('Searching Wikipedia')
-            query =query.replace("","wikipedia")
-            results = wikipedia.summary('query')
+
+            results = wikipedia.summary('note_text')
             wiki = results
             speak('According to Wikipedia')
             speak(wiki)
@@ -331,7 +323,6 @@ if __name__ == '__main__':
         elif "Good Morning" in query:
             speak("A warm" + query)
             speak("How are you Mister")
-            speak(assname)
 
         # most asked question from google Assistant
         elif "will you be my " in query:
